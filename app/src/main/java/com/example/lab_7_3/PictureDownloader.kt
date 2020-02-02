@@ -7,7 +7,10 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.*
+import android.util.Log
 import java.io.File
+import android.provider.MediaStore
+import android.provider.MediaStore.Images
 
 class PictureDownloader : Service() {
 
@@ -27,6 +30,8 @@ class PictureDownloader : Service() {
         }
     )
 
+
+
     private fun download(url: String): String {
         val downloadManager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
         val file = File(getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), MainActivity.fileName)
@@ -44,5 +49,7 @@ class PictureDownloader : Service() {
         return file.absolutePath
     }
 
+
     override fun onBind(intent: Intent?): IBinder? = messenger.binder
+
 }
