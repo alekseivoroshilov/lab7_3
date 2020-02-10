@@ -1,15 +1,12 @@
 package com.example.lab_7_3
 
 import android.annotation.SuppressLint
-import android.app.DownloadManager
-import android.app.IntentService
 import android.content.*
-import android.net.Uri
 import android.os.*
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import java.io.File
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         const val fileName = "lab_7_1"
         const val broadcastMessageKey = "broadcastMessageKey"
         const val broadcastActionKey = "com.example.lab_7_1.PIC_DOWNLOAD"
-        var instance: MainActivity? = null
+       // var instance: MainActivity? = this.
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,9 +36,10 @@ class MainActivity : AppCompatActivity() {
 
         }
         findViewById<Button>(R.id.btn_started).setOnClickListener {
-            val intent = Intent(this, Started::class.java)
+            val intent = Intent(this, StartedService::class.java)
                 .putExtra("URL_PARAM", fileName)
             intent.putExtra(Intent.EXTRA_TEXT, picUrl)
+            Log.i("MainActivity", "Service started with $intent")
             startService(intent)
         }
         findViewById<Button>(R.id.clear_button).setOnClickListener {
@@ -54,7 +52,8 @@ class MainActivity : AppCompatActivity() {
 
         receiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
-                instance!!.updateTextView(intent.getStringExtra(broadcastMessageKey)!!)
+                Log.i("MainActivity triggered", "got a path")
+                updateTextView(intent.getStringExtra(broadcastMessageKey)!!)
             }
         }
 

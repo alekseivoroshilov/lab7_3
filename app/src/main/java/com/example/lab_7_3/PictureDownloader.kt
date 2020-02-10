@@ -36,7 +36,7 @@ class PictureDownloader : Service() {
         val downloadManager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
         val file = File(getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), MainActivity.fileName)
         val request = DownloadManager.Request(Uri.parse(url)).apply {
-            setTitle("Скаченное фото")
+            setTitle("(Bound) Скаченное фото")
             setDescription("Downloading")
             setNotificationVisibility(
                 DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED

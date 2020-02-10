@@ -20,6 +20,7 @@
             </intent-filter>
         </activity>
         <service android:name=".PictureDownloader" />
+        <service android:name=".StartedService" />
     </application>
 
 </manifest>
